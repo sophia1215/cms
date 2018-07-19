@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+# Post
 class Post(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
