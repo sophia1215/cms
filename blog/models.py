@@ -2,11 +2,22 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
-
-# include the User model
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+# category
+class Category(models.Model):
+    name = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique=True)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
+    def __str__(self):
+        return self.name
 
 # Post
 class Post(models.Model):
@@ -14,6 +25,13 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     )
+    # category = models.ForeignKey(Category)
+    # Add on_delete=models.CASCADE
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+    )
+
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=True)
     content = models.TextField()
