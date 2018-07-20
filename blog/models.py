@@ -41,7 +41,11 @@ class Post(models.Model):
     seo_title = models.CharField(max_length=250)
     seo_description = models.CharField(max_length=160)
     # Add on_delete=models.CASCADE
-    author = models.ForeignKey(User, related_name='blog_posts', on_delete=models.CASCADE,)
+    author = models.ForeignKey(
+        User, 
+        related_name='blog_posts', 
+        on_delete=models.CASCADE,
+    )
     published = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -53,4 +57,27 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post, 
+        related_name='comments',
+        on_delete=models.CASCADE,
+    )
+    user = models.CharField(max_length=250)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    def approved(self):
+        self.approved = True
+        self.save()
+
+    def __str__(self):
+        return self.user
+
+
+
+
 
