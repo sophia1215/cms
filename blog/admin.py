@@ -11,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'published', 'created', 'status')
+    list_display = ('title', 'author', 'category', 'published', 'created', 'status')
     list_filter = ('status','created', 'published', 'author')
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug':('title',)}
