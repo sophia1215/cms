@@ -58,6 +58,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+# Comment
 class Comment(models.Model):
     post = models.ForeignKey(
         Post, 
@@ -69,7 +70,7 @@ class Comment(models.Model):
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
-
+    
     def approved(self):
         self.approved = True
         self.save()
