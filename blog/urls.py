@@ -8,6 +8,7 @@ urlpatterns = [
         path('<slug:slug>/', views.post_detail, name='post_detail'),
         # path('<int:id>/', views.post_detail, name='post_detail')
         path('category/<slug:category_slug>/', views.list_of_post_by_category, name='list_of_post_by_category'),
+        path('<slug:slug>/comment/', views.add_comment, name='add_comment'),
     # ]))    
 ]
 
